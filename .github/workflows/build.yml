@@ -32,3 +32,4 @@ jobs:
         with:
           name: apk-debug
           path: iptv_terry/build/app/outputs/flutter-apk/*.apk
+          Commit change > comiitchange
