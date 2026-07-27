@@ -1,13 +1,16 @@
 name: Build Flutter APK
 
 on:
-  workflow_dispatch: # Esto pone un botón para compilar
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      
+      - name: List files
+        run: ls -R  # Esto nos dirá si tu proyecto está bien subido
       
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
