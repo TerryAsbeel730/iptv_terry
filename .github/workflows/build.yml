@@ -6,7 +6,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -34,7 +33,3 @@ jobs:
         with:
           name: app-release
           path: build/app/outputs/flutter-apk/app-release.apk
-      uses: actions/upload-artifact@v4
-      with:
-        name: app-release
-        path: iptv_terry/build/app/outputs/flutter-apk/app-release.apk
