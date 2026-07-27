@@ -10,7 +10,7 @@ jobs:
       - uses: actions/checkout@v4
       
       - name: List files
-        run: ls -R  # Esto nos dirá si tu proyecto está bien subido
+        run: ls -R
       
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
@@ -19,13 +19,13 @@ jobs:
           channel: 'stable'
       
       - name: Get dependencies
-        run: flutter pub get
+        run: cd iptv_terry && flutter pub get
         
       - name: Build APK Debug
-        run: flutter build apk --debug --split-per-abi
+        run: cd iptv_terry && flutter build apk --debug --split-per-abi
         
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: apk-debug
-          path: build/app/outputs/flutter-apk/*.apk
+          path: iptv_terry/build/app/outputs/flutter-apk/*.apk
