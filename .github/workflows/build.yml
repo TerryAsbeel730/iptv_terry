@@ -12,13 +12,10 @@ jobs:
       - name: Unzip project
         run: unzip iptv_terry.zip
       
-      - name: List files
-        run: ls -R
-      
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.22.3'
+          flutter-version: '3.24.0'  # <-- Cambiado a 3.24
           channel: 'stable'
       
       - name: Get dependencies
