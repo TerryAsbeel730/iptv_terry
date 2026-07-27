@@ -15,8 +15,11 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.44.8'  # <-- Esta es la que pide
+          flutter-version: '3.44.8'
           channel: 'stable'
+      
+      - name: Fix lints version to 5.0.0
+        run: cd iptv_terry && sed -i 's/flutter_lints: \^6.0.0/flutter_lints: ^5.0.0/g' pubspec.yaml
       
       - name: Get dependencies
         run: cd iptv_terry && flutter pub get
