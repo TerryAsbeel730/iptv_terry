@@ -9,6 +9,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
+      - name: Unzip project
+        run: unzip iptv_terry.zip
+      
       - name: List files
         run: ls -R
       
