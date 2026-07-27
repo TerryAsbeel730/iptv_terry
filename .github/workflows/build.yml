@@ -2,37 +2,40 @@ name: Build Flutter APK
 
 on:
   workflow_dispatch:
-  push:  # <-- Agrega esta línea
-    paths:
-      - '.github/workflows/build.yml'
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    
     steps:
-      - uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v4
       
-      - name: Unzip project
-        run: unzip iptv_terry.zip
-      
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.44.8'
-          channel: 'stable'
-      
-      - name: Fix lints version to 5.0.0
-        run: cd iptv_terry && sed -i 's/flutter_lints: \^6.0.0/flutter_lints: ^5.0.0/g' pubspec.yaml
-      
-      - name: Get dependencies
-        run: cd iptv_terry && flutter pub get
+    - name: Setup Java
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '17'
         
-      - name: Build APK Debug
-        run: cd iptv_terry && flutter build apk --debug --split-per-abi
+    - name: Setup Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.22.0'
+        channel: 'stable'
         
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: apk-debug
-          path: iptv_terry/build/app/outputs/flutter-apk/*.apk
-          Commit change > comiitchange
+    - name: Fix lints version to 5.0.0
+      run: |
+        cd iptv_terry
+        sed -i "s/flutter_lints: \^6.0.0/flutter_lints: ^5.0.0/g" pubspec.yaml
+        
+    - name: Get dependencies
+      run: cd iptv_terry && flutter pub get
+      
+    - name: Build APK
+      run: cd iptv_terry && flutter build apk --release
+      
+    - name: Upload APK
+      uses: actions/upload-artifact@v4
+      with:
+        name: app-release
+        path: iptv_terry/build/app/outputs/flutter-apk/app-release.apk
